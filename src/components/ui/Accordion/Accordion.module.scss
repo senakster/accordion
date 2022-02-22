@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat&family=Roboto&display=swap');
+
+$animationTime: 500ms;
+
+.Accordion {
+    // POSITION
+    width: min(600px,100%);
+    margin: auto;
+
+    // FONT START
+    font-family: 'Arial', 'Inter', 'Roboto', 'Montserrat', 'open sans';
+
+    .title {
+        font-weight: bold;
+        font-size: min(1.5em, calc(.8em + .8vw));
+        border-bottom: 2px solid rgba(0,0,0,.5);
+        padding: .7em 0;
+        h2 {
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+    }
+
+    p {
+        font-size: min(1em, calc(.6em + .6vw));
+        font-weight: normal;
+    }
+
+    //FONT STYLE END
+
+    /**
+    *   Accordion Details Element
+    */
+    .AccordionDetailsElement {
+        // Collapsed default state
+        border-bottom: 2px solid rgba(0,0,0,.2);
+        .DetailsPanel {
+            height: auto;
+            max-height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            transition: max-height $animationTime;
+            p {
+                max-width: min(450px,100%);
+            }
+        }
+        // Active 
+        &.active {
+            .DetailsPanel {
+                max-height:200vh;
+            }
+        }
+
+        // HEADER STYLES
+        .ElementHeader {
+                margin-block-start: 0em;
+                margin-block-end: 0em;
+            .AccordionTrigger {
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-style: none;
+                background-color: transparent;
+                width: 100%;
+                text-align: left;
+                padding: .5em .5em .5em 0;
+                font-size: min(1.17em, calc(.7em + .7vw));
+                cursor: pointer;
+                &:focus,&[aria-expanded="true"] {
+                    &::after {
+                        content: '';
+                        background: hsl(216, 94%, 94%);
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%; 
+                        z-index: -2;
+                    }
+                }
+                .AccordionIcon, .AccordionTitle {
+                    z-index: -1;
+                }
+                .AccordionIcon {
+                    display: block;
+                    perspective: 1000px;
+                    transform-style: preserve-3d;
+                    transform: rotateZ(90deg) rotateY(0) rotateX(0deg);
+                    transition: transform $animationTime;                    
+                    &::after {
+                        content: '\276C';
+                    }
+                }
+                &[aria-expanded="true"] .AccordionIcon {
+                        transform: rotateZ(90deg) rotateY(-180deg) rotateX(360deg);
+                }
+            }
+        }
+        // HEADER STYLES END
+    }
+}

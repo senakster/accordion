@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Accordion from 'components/ui/Accordion/Accordion'
+import lorem from '_data/lorem.json';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={`container`}>
+        <div className={`content`}>
+          
+          {/* Example composed by JSON */}
+          {/* <Accordion title="An accordion" data={lorem} /> */}
+
+          {/* Example composed by children */}
+          <Accordion title="An accordion">
+            {lorem.map((l,i) => 
+              <div key={i} header={l.header}>
+                {l.details.map((d, i) => 
+                <p key={i}>{d}</p>
+                )}
+              </div>
+            )}
+          </Accordion>
+        </div>
+      </div>
     </div>
   );
 }
